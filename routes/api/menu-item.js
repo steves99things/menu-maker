@@ -3,19 +3,14 @@ var router = express.Router();
 
 var MenuItem = require('../../models/menu-item');
 
+var MenuItemHelper = require('../../helpers/menu-item-helper');
 
 
 router.route('/')
   // create a menu item
   .post(function(req, res) {
-    var menuItem = new MenuItem();
 
-    menuItem.name = req.body.name;
-    menuItem.section = req.body.section;
-    menuItem.description = req.body.description;
-    menuItem.price = req.body.price;
-    menuItem.unit = req.body.unit;
-    menuItem.notes = req.body.notes;
+    var menuItem = MenuItemHelper.createMenuItem(req);
 
     menuItem.save(function(err) {
       if (err)
@@ -56,14 +51,7 @@ router.route('/:menu_item_id')
       if (err)
         res.send(err);
 
-      menuItem.name = req.body.name;
-      menuItem.section = req.body.section;
-      menuItem.description = req.body.description;
-      menuItem.price = req.body.price;
-      menuItem.unit = req.body.unit;
-      menuItem.notes = req.body.notes;
-      menuItem.order = req.body.order;
-      menuItem.isActive = req.body.isActive;
+      menuItem = MenuItemHelper.updateMenuItem(menuItem, req);
 
       menuItem.save(function(err) {
         if (err)
@@ -89,6 +77,9 @@ router.route('/:menu_item_id')
       });
     });
   });
+
+
+
 
 
 module.exports = router;

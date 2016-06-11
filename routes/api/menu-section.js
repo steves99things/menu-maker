@@ -14,7 +14,7 @@ router.route('/')
     menuSection.subtitle = req.body.subtitle;
     menuSection.description = req.body.description;
 
-    MenuSection.save(function(err) {
+    menuSection.save(function(err) {
       if (err)
         res.send(err);
 
@@ -59,7 +59,7 @@ router.route('/:menu_section_id')
       menusection.order = req.body.order;
       menusection.isActive = req.body.isActive;
 
-      MenuSection.save(function(err) {
+      menuSection.save(function(err) {
         if (err)
           res.send(err)
 

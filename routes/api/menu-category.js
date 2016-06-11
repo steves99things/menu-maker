@@ -13,7 +13,7 @@ router.route('/')
     menuCategory.name = req.body.name;
     menuCategory.title = req.body.title;
 
-    MenuCategory.save(function(err) {
+    menuCategory.save(function(err) {
       if (err)
         res.send(err);
 
@@ -57,7 +57,7 @@ router.route('/:menu_category_id')
       menuCategory.order = req.body.order;
       menuCategory.isActive = req.body.isActive;
 
-      MenuCategory.save(function(err) {
+      menuCategory.save(function(err) {
         if (err)
           res.send(err)
 
