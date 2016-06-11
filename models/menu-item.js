@@ -14,7 +14,7 @@ var MenuItemSchema = new Schema({
   ],
   notes: String,
   order: { type: Number, default: 0 },
-  isActive: { type: Boolean, default: true },
+  isActive: { type: Boolean }
 });
 
 module.exports = mongoose.model('MenuItem', MenuItemSchema);

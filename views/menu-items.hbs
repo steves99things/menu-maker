@@ -1,17 +1,47 @@
 <div class="container">
-  it worked.
 
-  <h2>{{title}}</h2>
-  {{#items}}
-    <dl>
-      <dt>{{this.name}} <span class="pull-right">${{this.price}} / {{this.unit}}</span></dt>
-      <dd>{{this.description}} <br>
-      <em>{{this.notes}}</em></dd>
-    </dl>
-  {{/items}}
+  <h1>{{title}}</h1>
+
+  {{#if items}}
+    <h2>Active {{title}}</h2>
+    {{#items}}
+      {{#if this.isActive}}
+        <dl>
+          <dt><a href="/menu-items/edit/{{this._id}}">{{this.name}}</a> 
+            <span class="pull-right">
+              {{#this.prices}}
+                ${{this.price}} {{this.unit}}
+              {{/this.prices}}
+            </span>
+          </dt>
+          <dd>{{this.description}} <br>
+            <em>{{this.notes}}</em>
+          </dd>
+        </dl>
+      {{/if}}
+    {{/items}}
+
+    {{#items}}
+      {{#unless this.isActive}}
+        <dl class="disabled">
+          <dt><a href="/menu-items/edit/{{this._id}}">{{this.name}}</a> 
+            <span class="pull-right">
+              {{#this.prices}}
+                ${{this.price}} {{this.unit}}
+              {{/this.prices}}
+            </span>
+          </dt>
+          <dd>{{this.description}} 
+            <a href="/menu-items/delete/{{this._id}}" class="btn btn-danger glyphicon glyphicon-trash pull-right"></a><br>
+            <em>{{this.notes}}</em>
+          </dd>
+        </dl>
+      {{/unless}}
+    {{/items}}
+  {{/if}}
 
   <form action="/menu-item" method="POST" class="form-horizontal" role="form">
-    <legend>New Menu Item</legend>
+    <legend>{{formTitle}}</legend>
 
     <div class="form-group">
       <label for="input-name" class="col-sm-2 control-label">Name</label>
@@ -34,24 +64,25 @@
       </div>
     </div>
 
-    <!-- <div class="form-group">
-      <label for="input-price" class="col-sm-2 control-label">Price</label>
+    <div class="form-group">
+      <label for="input-notes" class="col-sm-2 control-label">Notes</label>
       <div class="col-sm-10">
-        <input type="text" id="input-price" name="price" class="form-control">
+        <input type="text" id="input-notes" name="notes" class="form-control">
       </div>
     </div>
 
+    <hr>
     <div class="form-group">
       <label for="input-unit" class="col-sm-2 control-label">Unit</label>
       <div class="col-sm-10">
         <input type="text" id="input-unit" name="unit" class="form-control">
       </div>
-    </div> -->
+    </div>
 
     <div class="form-group">
-      <label for="input-notes" class="col-sm-2 control-label">Notes</label>
+      <label for="input-price" class="col-sm-2 control-label">Price</label>
       <div class="col-sm-10">
-        <input type="text" id="input-notes" name="notes" class="form-control">
+        <input type="text" id="input-price" name="price" class="form-control">
       </div>
     </div>
 
@@ -63,3 +94,6 @@
   </form>
 
 </div>
+
+<h1>Debug</h1>
+{{items}}

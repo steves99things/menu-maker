@@ -5,6 +5,10 @@ exports.createMenuItem = function(req) {
 
   menuItem.name = req.body.name;
   // menuItem.section = req.body.section;
+  menuItem.prices = [{
+    price: req.body.price,
+    unit: req.body.unit
+  }],
   menuItem.description = req.body.description;
   menuItem.notes = req.body.notes;
 
@@ -12,16 +16,26 @@ exports.createMenuItem = function(req) {
 }
 
 exports.updateMenuItem = function(item, req) {
-  var menuitem = item;
+  var menuItem = item;
 
   menuItem.name = req.body.name;
-  menuItem.section = req.body.section;
+  // menuItem.section = req.body.section;
   menuItem.description = req.body.description;
-  menuItem.price = req.body.price;
-  menuItem.unit = req.body.unit;
   menuItem.notes = req.body.notes;
   menuItem.order = req.body.order;
   menuItem.isActive = req.body.isActive;
   
+  return menuItem;
+}
+
+exports.createItemPrice = function(item, req) {
+  var menuItem = item;
+  var itemPrice = {};
+
+  itemPrice.unit = req.body.unit;
+  itemPrice.price = req.body.price;
+
+  menuItem.prices.push(itemPrice);
+
   return menuItem;
 }
