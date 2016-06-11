@@ -1,0 +1,54 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+<h2>Menu Items</h2>
+<div id="example"></div>
+
+<script type="text/babel">
+ 
+
+  var MenuItemList = React.createClass({
+    getInitialState: function() {
+      return {
+        menuItems: []
+      };
+    },
+
+    componentDidMount: function() {
+      this.serverRequest = $.get(this.props.source, function (result) {
+        var menuItems = result;
+        this.setState({
+          menuItems: menuItems
+        });
+      }.bind(this));
+    },
+
+    componentWillUnmount: function() {
+      this.serverRequest.abort();
+    },
+
+    render: function() {
+      var menuItemNodes = this.state.menuItems.map(function(item) {
+        return (
+          <dl key={item._id}>
+            <dt>{item.name}</dt>
+            <dd>{item.description}</dd>
+          </dl>
+        );
+      });
+
+      return (
+        <div className="menuItemList">
+          {menuItemNodes}
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(
+    <MenuItemList source="/api/menu-item" />,
+    document.getElementById('example')
+  );
+
+</script>
+
