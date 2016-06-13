@@ -9,7 +9,7 @@ var MenuItemSchema = new Schema({
   prices: [
     {
       price: { type: Number, min: 0 },
-      unit: String
+      measurement: String
     }
   ],
   notes: String,

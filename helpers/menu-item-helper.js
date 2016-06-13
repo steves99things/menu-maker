@@ -7,7 +7,7 @@ exports.createMenuItem = function(req) {
   // menuItem.section = req.body.section;
   menuItem.prices = [{
     price: req.body.price,
-    unit: req.body.unit
+    measurement: req.body.measurement
   }],
   menuItem.description = req.body.description;
   menuItem.notes = req.body.notes;
@@ -32,7 +32,7 @@ exports.createItemPrice = function(item, req) {
   var menuItem = item;
   var itemPrice = {};
 
-  itemPrice.unit = req.body.unit;
+  itemPrice.measurement = req.body.measurement;
   itemPrice.price = req.body.price;
 
   menuItem.prices.push(itemPrice);

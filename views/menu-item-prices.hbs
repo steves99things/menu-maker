@@ -1,12 +1,12 @@
 <div class="container">
-  <a href="./"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+  <a href="/menu-items/edit/{{item._id}}"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
   <h1>{{title}}</h1>
 
   {{#if item.prices}}
     <table class="table">
       <thead>
         <tr>
-          <th>Unit</th>
+          <th>Measurement</th>
           <th>Price</th>
           <th></th>
         </tr>
@@ -14,9 +14,9 @@
       <tbody>
         {{#item.prices}}
           <tr>
-            <td>{{this.unit}}</td>
+            <td>{{this.measurement}}</td>
             <td>${{this.price}}</td>
-            <td class="text-right"><a href="/menu-items/delete/{{this._id}}" class="btn btn-danger glyphicon glyphicon-trash"></a></td>
+            <td class="text-right"><a href="./prices/delete/{{this._id}}" class="btn btn-danger glyphicon glyphicon-trash"></a></td>
           </tr>
         {{/item.prices}}
       </tbody>
@@ -30,16 +30,16 @@
     <legend>{{formTitle}}</legend>
 
     <div class="form-group">
-      <label for="input-unit" class="col-sm-2 control-label">Unit</label>
+      <label for="input-measurement" class="col-sm-2 control-label">Measurement</label>
       <div class="col-sm-10">
-        <input type="text" id="input-unit" name="unit" class="form-control">
+        <input type="text" id="input-measurement" name="measurement" class="form-control">
       </div>
     </div>
 
     <div class="form-group">
       <label for="input-price" class="col-sm-2 control-label">Price</label>
       <div class="col-sm-10">
-        <input type="number" id="input-price" name="price" class="form-control">
+        <input type="number" id="input-price" name="price" min="0" step=".01" class="form-control">
       </div>
     </div>
 

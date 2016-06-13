@@ -32,10 +32,25 @@ router.route('/')
     function renderItem(item) {
       res.render('menu-item-prices', {
         title: item.name + ' Prices',
-        formTitle: 'New Unit Price',
+        formTitle: 'New Price',
         item: item
       });
     }
+  });
+
+router.route('/delete/:item_price_id')
+  .get(function(req, res) {
+    MenuItem.findById(req.params.menu_item_id, function(err, item) {
+      if (err) throw err;
+
+      item.prices.id(req.params.item_price_id).remove();
+
+      item.save(function(err) {
+        if (err) throw err;
+
+        res.redirect('../');
+      });
+    });
   });
 
 
